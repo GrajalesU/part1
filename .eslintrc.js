@@ -16,10 +16,11 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/react-prop-types": "off",
+    "react/prop-types": "off",
   },
   settings: {
     react: {
       version: "detect",
     },
   },
-};
+}
