@@ -29,7 +29,6 @@ const Element = ({ title, excercises }) => {
 
 const Total = ({ content }) => {
   const sum = content.reduce((total, element) => {
-    console.log(element.excercises)
     return total + element.excercises
   }, 0)
 
@@ -37,27 +36,29 @@ const Total = ({ content }) => {
 }
 
 const App = () => {
-  const course = " Half Stack application development"
-  const content = [
-    {
-      title: "Fundamentals of React",
-      excercises: 10,
-    },
-    {
-      title: "Using props to pass data",
-      excercises: 7,
-    },
-    {
-      title: "State of a component",
-      excercises: 14,
-    },
-  ]
+  const course = {
+    name: " Half Stack application development",
+    parts: [
+      {
+        title: "Fundamentals of React",
+        excercises: 10,
+      },
+      {
+        title: "Using props to pass data",
+        excercises: 7,
+      },
+      {
+        title: "State of a component",
+        excercises: 14,
+      },
+    ],
+  }
 
   return (
     <div>
-      <Header course={course} />
-      <Content content={content} />
-      <Total content={content} />
+      <Header course={course.name} />
+      <Content content={course.parts} />
+      <Total content={course.parts} />
     </div>
   )
 }
