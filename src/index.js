@@ -64,7 +64,8 @@ const App = () => {
   )
 }
 */
-// Code of 1.6 to 1.14
+
+/* Code of 1.6 to 1.11
 const Header = () => {
   return <h1>GIVE FEEDBACK</h1>
 }
@@ -147,4 +148,52 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+*/
+
+// Code of 1.12 to 1.14
+
+const App = ({ anecdotes }) => {
+  const [selected, setSelected] = useState(0)
+  const total = anecdotes.length
+  const [votes, setVotes] = useState(Array(total).fill(0))
+  const [popularAnecdote, setPopularAnecdote] = useState(undefined)
+
+  const handleSelectedItem = () => {
+    setSelected(Math.floor(Math.random() * total))
+  }
+  const handleVote = () => {
+    const newVotes = [...votes]
+    newVotes[selected] = newVotes[selected] + 1
+    setVotes(newVotes)
+    setPopularAnecdote(anecdotes[votes.indexOf(Math.max(...votes))])
+  }
+  console.log(popularAnecdote)
+
+  return (
+    <div>
+      <h1>ANECDOTE OF THE DAY</h1>
+      <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleVote}>vote</button>
+      <button onClick={handleSelectedItem}>next anecdote</button>
+      {popularAnecdote ? (
+        <>
+          <h1>ANECDOTE WITH MOST VOTES</h1>
+          <p>{popularAnecdote}</p>
+          <p>has {Math.max(...votes)} votes</p>
+        </>
+      ) : null}
+    </div>
+  )
+}
+
+const anecdotes = [
+  "If it hurts, do it more often",
+  "Adding manpower to a late software project makes it later!",
+  "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
+  "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+  "Premature optimization is the root of all evil.",
+  "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+]
+
+ReactDOM.render(<App anecdotes={anecdotes} />, document.getElementById("root"))
